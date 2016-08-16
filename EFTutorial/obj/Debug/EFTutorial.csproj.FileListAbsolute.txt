@@ -1,0 +1,10 @@
+c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\bin\Debug\EFTutorial.exe.config
+c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\bin\Debug\EFTutorial.exe
+c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\bin\Debug\EFTutorial.pdb
+c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\bin\Debug\EntityFramework.dll
+c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\bin\Debug\EntityFramework.xml
+c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\obj\Debug\EFTutorial.csprojResolveAssemblyReference.cache
+c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\obj\Debug\EFTutorial.exe
+c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\obj\Debug\EFTutorial.pdb

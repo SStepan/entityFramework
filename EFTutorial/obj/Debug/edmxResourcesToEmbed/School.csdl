@@ -1,0 +1,234 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SchoolModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Cource">
+    <Key>
+      <PropertyRef Name="CourceId" />
+    </Key>
+    <Property Name="CourceId" Type="Int32" Nullable="false" />
+    <Property Name="CouceName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Location" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="TeacherId" Type="Int32" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK__Cource__TeacherI__267ABA7A" FromRole="Cource" ToRole="Teacher" />
+    <NavigationProperty Name="StudentCources" Relationship="Self.FK__StudentCo__Courc__30F848ED" FromRole="Cource" ToRole="StudentCource" />
+  </EntityType>
+  <EntityType Name="Standard">
+    <Key>
+      <PropertyRef Name="StandardId" />
+    </Key>
+    <Property Name="StandardId" Type="Int32" Nullable="false" />
+    <Property Name="StandardName" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="StudentAddresses" Relationship="Self.FK__StudentAd__Stand__33D4B598" FromRole="Standard" ToRole="StudentAddress" />
+    <NavigationProperty Name="Teachers" Relationship="Self.FK__Teacher__Standar__276EDEB3" FromRole="Standard" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="StudentID" />
+    </Key>
+    <Property Name="StudentID" Type="Int32" Nullable="false" />
+    <Property Name="StudentName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="StandardId" Type="Int32" />
+    <Property Name="RowVersion" Type="Byte" Nullable="false" ConcurrencyMode="Fixed" />
+    <NavigationProperty Name="StudentAddresses" Relationship="Self.FK__StudentAd__Stude__32E0915F" FromRole="Student" ToRole="StudentAddress" />
+    <NavigationProperty Name="StudentCources" Relationship="Self.FK__StudentCo__Stude__31EC6D26" FromRole="Student" ToRole="StudentCource" />
+  </EntityType>
+  <EntityType Name="StudentAddress">
+    <Key>
+      <PropertyRef Name="StudentAddressId" />
+    </Key>
+    <Property Name="StudentAddressId" Type="Int32" Nullable="false" />
+    <Property Name="StudentId" Type="Int32" />
+    <Property Name="Address1" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="Address2" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+    <Property Name="StandardId" Type="Int32" />
+    <NavigationProperty Name="Standard" Relationship="Self.FK__StudentAd__Stand__33D4B598" FromRole="StudentAddress" ToRole="Standard" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__StudentAd__Stude__32E0915F" FromRole="StudentAddress" ToRole="Student" />
+    <Property Name="AddressInfo" Type="SchoolModel.AddressCompl" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StudentCource">
+    <Key>
+      <PropertyRef Name="StudentCourceId" />
+    </Key>
+    <Property Name="StudentId" Type="Int32" Nullable="false" />
+    <Property Name="CourceId" Type="Int32" Nullable="false" />
+    <Property Name="StudentCourceId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cource" Relationship="Self.FK__StudentCo__Courc__30F848ED" FromRole="StudentCource" ToRole="Cource" />
+    <NavigationProperty Name="Student" Relationship="Self.FK__StudentCo__Stude__31EC6D26" FromRole="StudentCource" ToRole="Student" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="TeacherId" />
+    </Key>
+    <Property Name="TeacherId" Type="Int32" Nullable="false" />
+    <Property Name="TeacherName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="StandardId" Type="Int32" />
+    <Property Name="TeacherType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Cources" Relationship="Self.FK__Cource__TeacherI__267ABA7A" FromRole="Teacher" ToRole="Cource" />
+    <NavigationProperty Name="Standard" Relationship="Self.FK__Teacher__Standar__276EDEB3" FromRole="Teacher" ToRole="Standard" />
+  </EntityType>
+  <Association Name="FK__Cource__TeacherI__267ABA7A">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="0..1" />
+    <End Role="Cource" Type="Self.Cource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="TeacherId" />
+      </Principal>
+      <Dependent Role="Cource">
+        <PropertyRef Name="TeacherId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentCo__Courc__30F848ED">
+    <End Role="Cource" Type="Self.Cource" Multiplicity="1" />
+    <End Role="StudentCource" Type="Self.StudentCource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cource">
+        <PropertyRef Name="CourceId" />
+      </Principal>
+      <Dependent Role="StudentCource">
+        <PropertyRef Name="CourceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentAd__Stand__33D4B598">
+    <End Role="Standard" Type="Self.Standard" Multiplicity="0..1" />
+    <End Role="StudentAddress" Type="Self.StudentAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Standard">
+        <PropertyRef Name="StandardId" />
+      </Principal>
+      <Dependent Role="StudentAddress">
+        <PropertyRef Name="StandardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teacher__Standar__276EDEB3">
+    <End Role="Standard" Type="Self.Standard" Multiplicity="0..1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Standard">
+        <PropertyRef Name="StandardId" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="StandardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teacher__Standar__2A4B4B5E">
+    <End Role="Standard" Type="Self.Standard" Multiplicity="0..1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Standard">
+        <PropertyRef Name="StandardId" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="StandardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentAd__Stude__32E0915F">
+    <End Role="Student" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="StudentAddress" Type="Self.StudentAddress" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="StudentAddress">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StudentCo__Stude__31EC6D26">
+    <End Role="Student" Type="Self.Student" Multiplicity="1" />
+    <End Role="StudentCource" Type="Self.StudentCource" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="StudentID" />
+      </Principal>
+      <Dependent Role="StudentCource">
+        <PropertyRef Name="StudentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SchoolEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cources" EntityType="Self.Cource" />
+    <EntitySet Name="Standards" EntityType="Self.Standard" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="StudentAddresses" EntityType="Self.StudentAddress" />
+    <EntitySet Name="StudentCources" EntityType="Self.StudentCource" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <AssociationSet Name="FK__Cource__TeacherI__267ABA7A" Association="Self.FK__Cource__TeacherI__267ABA7A">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Cource" EntitySet="Cources" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentCo__Courc__30F848ED" Association="Self.FK__StudentCo__Courc__30F848ED">
+      <End Role="Cource" EntitySet="Cources" />
+      <End Role="StudentCource" EntitySet="StudentCources" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentAd__Stand__33D4B598" Association="Self.FK__StudentAd__Stand__33D4B598">
+      <End Role="Standard" EntitySet="Standards" />
+      <End Role="StudentAddress" EntitySet="StudentAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teacher__Standar__276EDEB3" Association="Self.FK__Teacher__Standar__276EDEB3">
+      <End Role="Standard" EntitySet="Standards" />
+      <End Role="Teacher" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teacher__Standar__2A4B4B5E" Association="Self.FK__Teacher__Standar__2A4B4B5E">
+      <End Role="Standard" EntitySet="Standards" />
+      <End Role="Teacher" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentAd__Stude__32E0915F" Association="Self.FK__StudentAd__Stude__32E0915F">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentAddress" EntitySet="StudentAddresses" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StudentCo__Stude__31EC6D26" Association="Self.FK__StudentCo__Stude__31EC6D26">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="StudentCource" EntitySet="StudentCources" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(SchoolModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(SchoolModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="AddressCompl">
+    <Property Type="String" Name="City" MaxLength="84" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="State" MaxLength="256" FixedLength="false" Unicode="false" />
+  </ComplexType>
+</Schema>
