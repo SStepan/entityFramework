@@ -8,3 +8,6 @@ c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\bin\
 c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\obj\Debug\EFTutorial.csprojResolveAssemblyReference.cache
 c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\obj\Debug\EFTutorial.exe
 c:\users\stepan\documents\visual studio 2015\Projects\EFTutorial\EFTutorial\obj\Debug\EFTutorial.pdb
+C:\Users\Stepan\Documents\Visual Studio 2015\Projects\EFTutorial\Project\EFTutorial\bin\Debug\EFTutorial.exe.config
+C:\Users\Stepan\Documents\Visual Studio 2015\Projects\EFTutorial\Project\EFTutorial\obj\Debug\EFTutorial.exe
+C:\Users\Stepan\Documents\Visual Studio 2015\Projects\EFTutorial\Project\EFTutorial\obj\Debug\EFTutorial.pdb
